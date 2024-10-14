@@ -1,0 +1,344 @@
+/* 整体样式 */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+    /* 浅蓝色渐变 */
+}
+
+.button-container {
+    display: flex;
+    /* 使用 Flexbox */
+    gap: 10px;
+    /* 按钮之间的间距 */
+}
+
+button.selected {
+    background: #000000;
+    /* 选中状态背景颜色 */
+}
+
+/* 网格容器样式 */
+.container {
+    padding: 20px;
+    display: grid;
+    gap: 10px;
+    width: 80vw;  /* 增加容器宽度 */
+    height: 80vh; /* 增加容器高度 */
+    max-width: 1200px;
+    max-height: 1000px;
+}
+
+/* 根据选择的尺寸动态调整网格 */
+.container[data-size="2x2"] {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.container[data-size="4x4"] {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.container[data-size="6x6"] {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+/* 卡片样式 */
+.card {
+    width: 100%;
+    height: 100%; /* 让卡片高度自适应容器 */
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+    border: 2px solid #ff9260; /* 添加边框 */
+    border-radius: 10px; /* 圆角边框 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+}
+
+.card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* 增加阴影效果 */
+}
+
+/* 卡片翻转效果 */
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+
+
+
+.face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.front {
+    background-color: #ff9260;
+}
+
+.back {
+    background-color: #ff9260;
+    color: white;
+    transform: rotateY(180deg);
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 25px;
+    /* 调整内边距以扩展按钮 */
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    /* 圆角 */
+    background: linear-gradient(90deg, #ff9260, #0056b3);
+    /* 渐变背景 */
+    color: white;
+    /* 字体颜色 */
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* 阴影效果 */
+    line-height: 1.5;
+    /* 使按钮高度与字体高度一致 */
+}
+
+button:hover {
+    background: linear-gradient(90deg, #ff9260, #003d80);
+    /* 悬停时的渐变背景 */
+    transform: translateY(-2px);
+    /* 悬停时轻微上升 */
+}
+
+button:active {
+    transform: translateY(0);
+    /* 按下时回到原位 */
+}
+
+#countdown {
+    font-size: 60px;
+    font-weight: bold;
+    color: #ff0000;
+    animation: pulse 1s infinite;
+    visibility: hidden;
+    /* 初始状态为隐藏，但保留空间 */
+}
+
+#game-time {
+    font-size: 60px;
+    font-weight: bold;
+    color: #ff0000;
+    animation: pulse 1s infinite;
+    visibility: hidden;
+    /* 初始状态为隐藏，但保留空间 */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+select {
+    background-color: #ff9260;
+    /* 棕色，按钮的大地色背景 */
+    color: white;
+    /* 字体颜色 */
+    border-radius: 10px;
+    /* 圆角 */
+    padding: 10px;
+}
+
+select:disabled {
+    background-color: #cccccc;  /* 禁用时的背景颜色 */
+    color: #666666;             /* 禁用时的字体颜色 */
+    cursor: not-allowed;        /* 禁用时显示不可用光标 */
+}
+
+option {
+    background-color: white;
+    /* 选项的默认背景 */
+    color: black;
+    /* 默认字体颜色 */
+}
+
+select:hover,
+select:focus {
+    background-color: #A0522D;
+    /* 橙棕色背景 */
+    color: white;
+    /* 字体颜色 */
+}
+
+option:checked {
+    background-color: #ff9260;
+    /* 选中时的背景颜色 */
+    color: white;
+    /* 选中时的字体颜色 */
+}
+
+/* 新增: 主题下拉菜单样式 */
+select#theme-select {
+    margin: 10px;
+    padding: 10px 25px;
+    /* 调整内边距以扩展按钮 */
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    /* 圆角 */
+    background: linear-gradient(90deg, #ff9260, #0056b3);
+    /* 渐变背景 */
+    color: rgb(255, 255, 255);
+    /* 字体颜色 */
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* 阴影效果 */
+    line-height: 1.5;
+    /* 使按钮高度与字体高度一致 */
+}
+
+select#theme-select:hover {
+    background: linear-gradient(90deg, #ff9260, #003d80);
+    /* 悬停时的渐变背景 */
+}
+
+/* 用于修复 iOS Safari 中的默认样式问题 */
+select#theme-select::-ms-expand {
+    display: none;
+}
+
+/* 新增: 选择尺寸下拉菜单样式 */
+select#size-select {
+    margin: 10px;
+    padding: 10px 25px;
+    /* 调整内边距以扩展按钮 */
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    /* 圆角 */
+    background: linear-gradient(90deg, #ff9260, #0056b3);
+    /* 渐变背景 */
+    color: rgb(255, 255, 255);
+    /* 字体颜色 */
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* 阴影效果 */
+    line-height: 1.5;
+    /* 使按钮高度与字体高度一致 */
+}
+
+select#size-select:hover {
+    background: linear-gradient(90deg, #ff9260, #003d80);
+    /* 悬停时的渐变背景 */
+}
+
+/* 用于修复 iOS Safari 中的默认样式问题 */
+select#size-select::-ms-expand {
+    display: none;
+}
+
+.button-container label {
+    margin: 10px;
+    padding: 10px 25px;
+    /* 调整内边距以扩展按钮 */
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    /* 圆角 */
+    background: linear-gradient(90deg, #ff9260, #0056b3);
+    /* 渐变背景 */
+    color: white;
+    /* 字体颜色 */
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* 阴影效果 */
+    line-height: 1.5;
+    /* 使按钮高度与字体高度一致 */
+    display: inline-flex;
+    align-items: center;
+    /* 垂直居中内容 */
+}
+
+.button-container input[type="radio"] {
+    margin-right: 10px;
+    /* 调整圆圈和文字的距离 */
+    width: 20px;
+    height: 20px;
+    accent-color: rgb(255, 255, 255);
+    /* 设置圆圈的颜色 */
+    vertical-align: middle;
+    /* 设置单选按钮与文字的对齐 */
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.fade-out {
+    opacity: 0;
+    /* 设置透明度为0 */
+    transition: opacity 1s ease;
+    /* 1秒内渐隐 */
+}
+
+.swal-popup {
+    background-color: #ff9260;
+    /* 弹窗背景色 */
+    border-radius: 15px;
+    /* 圆角 */
+}
+
+.swal-button {
+    background-color: #ff9260;
+    /* 按钮颜色 */
+    border: none;
+    /* 去掉边框 */
+    border-radius: 5px;
+    /* 圆角 */
+    padding: 10px 20px;
+    /* 按钮内边距 */
+    color: white;
+    /* 字体颜色 */
+    transition: background-color 0.3s;
+    /* 过渡效果 */
+}
+
+.swal-button:hover {
+    background-color: #ff9260;
+    /* 悬停时的颜色 */
+}

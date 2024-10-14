@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- 引入CSS -->
+    <title>卡片翻转效果</title>
+</head>
+
+<body>
+    <div id="countdown" style="font-size: 24px; margin-bottom: 20px; visibility: hidden;">倒数: 10</div>
+    <div id="game-time" style="font-size: 24px; margin-bottom: 20px; visibility: hidden;">遊玩時間: 0 秒</div>
+    <div class="button-container">
+        <button id="start-game">開始遊戲</button>
+        <!-- 改为下拉菜单 -->
+        <select id="theme-select">
+            <option value="1" disabled selected>選擇主題</option>
+            <option value="vegetable">食物</option>
+            <option value="halloween">節日</option>
+        </select>
+        <!-- 添加选择尺寸的下拉菜单 -->
+        <select id="size-select">
+            <option value="2" selected>選擇尺寸</option>
+            <option value="2x2">2x2</option>
+            <option value="4x4">4x4</option>
+            <option value="6x6">6x6</option>
+        </select>
+        <label>
+            <input type="checkbox" id="hide-checkbox"> 隱藏卡牌
+        </label>
+        <audio id="bgm" loop>
+            <source src="sounds/music.wav" type="audio/mpeg">
+            您的浏览器不支持音频元素。
+        </audio>
+    </div>
+    <div class="container" id="card-container"></div>
+
+    <script src="script.js"></script> <!-- 引入JS -->
+
+</body>
+
+</html>
