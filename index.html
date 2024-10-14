@@ -15,6 +15,10 @@
     <div id="countdown" style="font-size: 24px; margin-bottom: 20px; visibility: hidden;">倒数: 10</div>
     <div id="game-time" style="font-size: 24px; margin-bottom: 20px; visibility: hidden;">遊玩時間: 0 秒</div>
     <div class="button-container">
+        <audio id="bgm" loop muted>
+            <source src="sounds/music.wav" type="audio/mpeg">
+            您的浏览器不支持音频元素。
+        </audio>
         <button id="start-game">開始遊戲</button>
         <!-- 改为下拉菜单 -->
         <select id="theme-select">
@@ -32,10 +36,6 @@
         <label>
             <input type="checkbox" id="hide-checkbox"> 隱藏卡牌
         </label>
-        <audio id="bgm" loop>
-            <source src="sounds/music.wav" type="audio/mpeg">
-            您的浏览器不支持音频元素。
-        </audio>
     </div>
     <div class="container" id="card-container"></div>
 

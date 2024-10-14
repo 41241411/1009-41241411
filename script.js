@@ -56,12 +56,12 @@ const hideCheckbox = document.getElementById("hide-checkbox");
 // 获取 BGM 元素
 const bgm = document.getElementById("bgm");
 
-window.onload = function() {
-  // 确保页面加载后尝试播放音乐
-  try {
-      bgm.play(); // 尝试播放背景音乐
-  } catch (error) {
-  }
+window.onload = function () {
+  // 页面加载后自动播放音乐（静音）
+  bgm.play().catch((error) => {
+    console.log("自动播放被阻止:", error);
+    // 提示用户进行交互以播放音乐
+  });
 };
 
 // 隐藏已配对卡牌的函数
@@ -96,6 +96,8 @@ document.getElementById("size-select").addEventListener("change", function () {
 });
 
 document.getElementById("start-game").onclick = () => {
+  bgm.muted = false; // 取消静音
+  bgm.play(); // 播放背景音乐
   document.getElementById("start-game").disabled = true;
   themeSelect.disabled = true;
   sizeSelect.disabled = true;
@@ -104,7 +106,8 @@ document.getElementById("start-game").onclick = () => {
   if (themeSelect.value === "1" || sizeSelect.value === "2") {
     Swal.fire({
       title: "错误",
-      text: themeSelect.value === "1" ? "请先选择一个主题！" : "请先选择一个尺寸！",
+      text:
+        themeSelect.value === "1" ? "请先选择一个主题！" : "请先选择一个尺寸！",
       icon: "error",
       confirmButtonText: "确定",
     }).then(() => {
@@ -191,15 +194,18 @@ function createCard(data) {
           successSound.play();
           matchedCardsArray.push(card1, card2);
 
-           // 将背面的背景颜色改为黄色
-           card1.querySelector(".back").style.backgroundColor = "transparent";
-           card2.querySelector(".back").style.backgroundColor = "transparent"; 
+          // 将背面的背景颜色改为黄色
+          card1.querySelector(".back").style.backgroundColor = "transparent";
+          card2.querySelector(".back").style.backgroundColor = "transparent";
 
           if (hideCheckbox.checked) {
             card1.style.visibility = "hidden";
             card2.style.visibility = "hidden";
           }
-          if (matchedCardsArray.length === document.querySelectorAll(".card").length) {
+          if (
+            matchedCardsArray.length ===
+            document.querySelectorAll(".card").length
+          ) {
             endGame();
           }
         } else {
@@ -283,5 +289,7 @@ function endGame() {
     confirmButtonText: "重新開始",
   }).then(() => {
     location.reload();
+    bgm.pause(); // 停止播放背景音乐
+    bgm.currentTime = 0; // 重置音乐到开始位置
   });
 }
